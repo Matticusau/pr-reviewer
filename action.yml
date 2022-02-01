@@ -1,0 +1,40 @@
+name: 'PR Reviewer'
+description: 'Pull Request Review automation - auto labels, comment & review automation'
+author: 'MatticusAu'
+inputs:
+  repo-token:
+    description: 'The GITHUB_TOKEN secret to use with authenticating. If you require additional permissions use a PAT stored as a secret on your repo.'
+    required: true
+  enable-frontmatter:
+    description: Boolean of if the reviewer should be taken from YAML front matter
+    required: true
+  enable-message:
+    description: Boolean if a message should be sent instructing the user of their next actions
+    required: true
+  message:
+    description: The text to show in the auto message to the user
+    required: false
+  requirereviewcount:
+    description: The numeric number of reviews to require, simply used to display a label if the review count is less
+    required: true
+  authorkey:
+    description: The string value of the key in YAML front matter to find the author value, defaults to 'author'
+    required: false
+  github-user-from-author-file:
+    description: Boolean of if the github username needs to be retrieved from a YAML configuration file, or if the value in the front matter is the user name
+    required: true
+  authorfilepath:
+    description: The string value of the path in the repo to find the file that contains the list of github users and friendly name e.g. '_data/authors.yaml'
+    required: false
+  bypass-for-fileowner:
+    description: If true then the review required label will be removed if it is the owner of the file
+    required: true
+  review-required-label:
+    description: The label name to use when a review is required
+    required: false
+runs:
+  using: 'node12'
+  main: 'lib/index.js'
+branding:
+  icon: git-merge
+  color: green
